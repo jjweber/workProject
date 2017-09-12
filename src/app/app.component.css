@@ -1,0 +1,12 @@
+.navbar {
+  background: #327cf2;
+}
+
+.navbar-brand,
+.navbar-nav>li>a {
+  color: #FFF;
+}
+
+h1 {
+  font-size: 30px;
+}
