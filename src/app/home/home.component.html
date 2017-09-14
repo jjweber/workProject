@@ -1,6 +1,6 @@
-<!-- HTML for SEARCH BAR -->
+
 <form class="navbar-form searchForm">
-  <select id="userSelections" class="searchBar" name="select1" onmousedown="if(this.options.length>4){this.size=4;}"  onchange='this.size=0;' onblur="this.size=0;">
+  <select [(ngModel)]="newsSource" (ngModelChange)="sourceChanged($event)" class="searchBar" name="select1" onmousedown="if(this.options.length>4){this.size=4;}" onclick="this.size=0;">
     <option value="none">Select News Source</option>
     <option value="abc-news-au">ABC News</option>
     <option value="associated-press">Associated Press</option>
@@ -22,7 +22,7 @@
     <option value="focus">Focus</option>
     <option value="fortune">Fortune</option>
     <option value="four-four-two">FourFourTwo</option>
-    <option value="Fox Sports">fox-sports</option>
+    <option value="fox-sports">Fox Sports</option>
     <option value="google-news">Google News</option>
     <option value="hacker-news">Hacker News</option>
     <option value="ign">IGN</option>
@@ -47,19 +47,42 @@
   </select>
   <button type="button" onclick="makeRequest()">Search</button>
 </form>
-<div class="container">
-  <table id="dataTable" class="table table-striped">
-    <thead>
-      <tr id="myRow">
-        <td>Title</td>
-        <td>Description</td>
-        <td>Author/Url</td>
-        <td>Image Url</td>
-      </tr>
-    </thead>
 
-    <tbody id="dataBody">
+<!--{{ articles | json }}-->
 
-    </tbody>
-  </table>
+<div>
+  <h1>{{pageTitle}}</h1>
+
+  <div id="articlesContainer" class="container">
+    <ul id="cardContainer">
+      <li id="articleCards" *ngFor="let article of articlesList[0]; let i = index">
+        <a class="hidden">{{i + 1}}</a>
+        <h3 class="articleTitle">{{article.title}}</h3>
+        <div><img class="newsImages" src="{{article.urlToImage}}"></div>
+        <p class="articleDescription">{{article.description}}</p>
+        <a id="modalBtn" data-toggle="modal" data-target="#myModal">Larger View</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body" *ngFor="let article of articlesList[0]">
+          <h3 class="articleTitle">{{article.title}}</h3>
+          <div><img class="newsImages" src="{{article.urlToImage}}"></div>
+          <p class="articleDescription">{{article.description}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Favorite</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,11 @@
+h2, p {
+  text-align: left;
+}
+
+h2 {
+  margin-top: 5rem;
+}
+
+p {
+  text-indent: 5rem;
+}

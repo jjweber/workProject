@@ -1,3 +1,10 @@
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+
 .navbar {
   background: #327cf2;
 }
@@ -7,6 +14,30 @@
   color: #FFF;
 }
 
+#container {
+   min-height:100%;
+   position: relative;
+}
+
+#main {
+  height: 100%;
+  min-height:100%;
+  overflow: auto;
+  height: auto !important;
+  padding-bottom: 5rem;
+}
+
 h1 {
   font-size: 30px;
+}
+
+footer {
+  position: fixed;
+  padding: 1rem;
+  margin-top: 5rem;
+  text-align: center;
+  background: #CCC;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
