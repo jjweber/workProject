@@ -1,7 +1,6 @@
 
 <form class="navbar-form searchForm">
-  <select [(ngModel)]="newsSource" (ngModelChange)="sourceChanged($event)" class="searchBar" name="select1" onmousedown="if(this.options.length>4){this.size=4;}" onclick="this.size=0;">
-    <option value="none">Select News Source</option>
+  <select [(ngModel)]="newsSource" (ngModelChange)="sourceChanged($event)" id="searchBar" name="select1" onmousedown="if(this.options.length>4){this.size=4;}" onblur="this.size=0;">
     <option value="abc-news-au">ABC News</option>
     <option value="associated-press">Associated Press</option>
     <option value="bbc-news">BBC News</option>
@@ -60,7 +59,7 @@
         <h3 class="articleTitle">{{article.title}}</h3>
         <div><img class="newsImages" src="{{article.urlToImage}}"></div>
         <p class="articleDescription">{{article.description}}</p>
-        <a id="modalBtn" data-toggle="modal" data-target="#myModal">Larger View</a>
+        <a id="modalBtn" data-toggle="modal" data-target="#myModal" [attr.data-id]="article" (click)="SelectArticle(article)">Larger View</a>
       </li>
     </ul>
   </div>
@@ -73,14 +72,17 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">Modal title</h4>
         </div>
-        <div class="modal-body" *ngFor="let article of articlesList[0]">
-          <h3 class="articleTitle">{{article.title}}</h3>
-          <div><img class="newsImages" src="{{article.urlToImage}}"></div>
-          <p class="articleDescription">{{article.description}}</p>
+        <div class="modal-body">
+          <h3 class="articleTitle">{{selectedArticle.title}}</h3>
+          <div><img class="newsImages" src="{{selectedArticle.urlToImage}}"></div>
+          <p class="articleDescription">Description: {{selectedArticle.description}}</p>
+          <p class="articleAuthor" *ngIf="selectedArticle.author; else elseBlock">Author: {{selectedArticle.author}}</p>
+          <ng-template #elseBlock>Author: Unknown<br></ng-template>
+          <a href="{{selectedArticle.url}}">Link to Article: {{selectedArticle.url}}</a>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Favorite</button>
+          <button type="button" class="btn btn-primary" [attr.data-id]="selectedArticle" (click)="SaveArticle(selectedArticle)" data-dismiss="modal">Favorite</button>
         </div>
       </div>
     </div>

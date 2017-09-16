@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ArticleService } from '../services/article.service';
 
-class ArticleDO {
-constructor(
-    public title: string) { }
-}
+const selectArticle = {name: 'test'};
 
 @Component({
   selector: 'app-home',
@@ -15,8 +12,11 @@ constructor(
 export class HomeComponent implements OnInit {
   articles: any;
   newsSource: any = '';
-  articlesList = new Array;
+  articlesList: any = [];
+  selectedArticle: any = {};
+  savedArticle: any = {};
   pageTitle = 'News Feeds';
+  articleStore: any = [];
 
   constructor(private articleService: ArticleService) {
   }
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
       .subscribe((data) => {
         this.articlesList = new Array;
         console.log('Data: ', data);
-        // this.articles = data;
+
         this.articlesList.push(data.articles);
         console.log(this.articlesList);
       });
@@ -46,5 +46,22 @@ export class HomeComponent implements OnInit {
         this.articlesList.push(data.articles);
         console.log(this.articlesList);
       });
+  }
+  SelectArticle(article: any) {
+    this.selectedArticle = article;
+  }
+
+  SaveArticle(selectedArticle: any) {
+    this.savedArticle = selectedArticle;
+    console.log(this.savedArticle);
+    this.articleStore.push(this.savedArticle);
+    let index: any = 0;
+    for (let i = 0; i < this.articleStore.length; i++) {
+      index++;
+    }
+    console.log(index);
+    const JsonreadyArticles = JSON.stringify(this.savedArticle);
+    localStorage.setItem('article' + index, JsonreadyArticles);
+    console.log(localStorage.length);
   }
 }
