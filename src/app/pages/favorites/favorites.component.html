@@ -1,14 +1,15 @@
 <h1>My Favorites</h1>
 
 <div id="articlesContainer" class="container">
+
   <ul class="cardContainer card-group row">
-    <li class="articleCards" *ngFor="let article of savedArticles; let i = index">
+    <li (click)="ClickedArticle(article, i)" class="articleCards" *ngFor="let article of articlesFromStorage; let i = index">
       <div class="articleInfo">
         <h4 class="articleTitle">{{article.title}}</h4>
         <div><img class="newsImages" src="{{article.urlToImage}}"></div>
         <p class="articleDescription">{{article.description}}</p>
         <div class="overlay"></div>
-        <a id="favoritesModalBtn" data-toggle="modal" data-target="#favoritesModal" [attr.data-id]="article" (click)="ClickedArticle(article)">See More</a>
+        <a id="favoritesModalBtn" data-toggle="modal" data-target="#favoritesModal" [attr.data-id]="article">See More</a>
       </div>
       <div class="commentCard">
         <h4 class="commentTitle">Comment</h4>
@@ -37,7 +38,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" [attr.data-id]="clickedArticle" (click)="DeleteArticle(clickedArticle)" data-dismiss="modal">Delete</button>
+        <button type="button" class="btn btn-primary" [attr.data-id]="clickedArticle" (click)="DeleteArticle()" data-dismiss="modal">Delete</button>
       </div>
     </div>
   </div>

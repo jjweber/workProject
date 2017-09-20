@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { NewsStorageService } from '../services/newsStorage.service';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-favorites',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favorites.component.css']
 })
 export class FavoritesComponent implements OnInit {
+  articlesFromStorage: any = [];
+  indexOfArticleToDelete: any;
 
   articleKeyId: any = [];
   savedArticles: any = [];
@@ -16,11 +18,12 @@ export class FavoritesComponent implements OnInit {
   removeArticle: any = {};
 
 
-  constructor() {
-
-  }
+  constructor(private favoritesService: FavoritesService) {}
 
   ngOnInit() {
+    this.articlesFromStorage = this.favoritesService.getFavoritesFromStorage();
+    console.log('Articles From Storage', this.articlesFromStorage);
+    /*
     if (localStorage.length > 0) {
       // We have items
       for (let i = 0; i < localStorage.length; i++) {
@@ -44,17 +47,29 @@ export class FavoritesComponent implements OnInit {
 
       console.log('We have none');
     }
+    */
   }
 
-  ClickedArticle(article: any) {
+  ClickedArticle(article: any, index) {
+    console.log('Article clicked: ', article);
     this.clickedArticle = article;
+
+    console.log('Removing article at index of: ', index);
+    this.indexOfArticleToDelete = index;
   }
 
-  DeleteArticle(clickedArticle: any) {
+  DeleteArticle() {
+    console.log('Fix deactivated...');
+
+    this.favoritesService.removeFavorite(this.indexOfArticleToDelete);
+    /*
     this.removeArticle = clickedArticle;
     if (confirm('Are you sure you want to delete this article from your favorites?') === true) {
       console.log(this.removeArticle);
       localStorage.removeItem(this.removeArticle.key);
     }
+    */
+
+    this.articlesFromStorage = this.favoritesService.getFavoritesFromStorage();
   }
 }

@@ -1,6 +1,6 @@
 <!-- onmousedown="if(this.options.length>4){this.size=4;}" onblur="this.size=0;" -->
 <form class="navbar-form searchForm">
-  <select class="selectpicker" data-size="5" [(ngModel)]="newsSource" (ngModelChange)="sourceChanged($event)" id="searchBar" name="select1">
+  <select class="dropdown" size="5" [(ngModel)]="newsSource" (ngModelChange)="sourceChanged($event)" id="searchBar" name="select1">
 
     <optgroup label="Buisness">
       <option value="business-insider">Business Insider</option>
@@ -75,7 +75,7 @@
 
   <div id="articlesContainer" class="container">
     <ul class="cardContainer">
-      <li class="articleCards" *ngFor="let article of articlesList[0]; let i = index">
+      <li class="articleCards" *ngFor="let article of articlesList; let i = index">
         <a class="hidden">{{i + 1}}</a>
         <h3 class="articleTitle">{{article.title}}</h3>
         <div><img class="newsImages" src="{{article.urlToImage}}"></div>
@@ -112,17 +112,19 @@
   <div class="modal fade" id="myModalPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
+        <!-- <pre>{{ articleStore | json }}</pre>-->
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">Article Comment</h4>
         </div>
         <div class="modal-body">
           <p>Please add a comment about the article to save it.</p>
-          <input type="text" name="commentText" id="commentText" placeholder="Leave a comment" [autofocus]="true">
+          <input [(ngModel)]="selectedArticle.comment" name="commentText" placeholder="Leave a comment" />
+          <!-- <input type="text" name="commentText" id="commentText" placeholder="Leave a comment" [autofocus]="true"> -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" [attr.data-id]="selectedArticle" (click)="SaveArticle(selectedArticle)" data-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-primary" (click)="SaveArticle()" data-dismiss="modal">Save</button>
         </div>
       </div>
     </div>

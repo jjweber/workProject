@@ -10,6 +10,8 @@ import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { AboutComponent } from './pages/about/about.component';
 
 import { ArticleService } from './services/article.service';
+import { FavoritesService } from './services/favorites.service';
+
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 // import { NewsStorageService } from './services/newsStorage.service';
@@ -37,7 +39,7 @@ const appRoutes: Routes = [
     JsonpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ArticleService],
+  providers: [ArticleService, FavoritesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

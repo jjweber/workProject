@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ArticleService } from '../../services/article.service';
-// import { NewsStorageService } from '../services/newsStorage.service';
-
-// const selectArticle = {name: 'test'};
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-home',
@@ -15,85 +13,61 @@ export class HomeComponent implements OnInit {
   commentText: any;
   newsSource: any = 'abc-news-au';
   articlesList: any = [];
-  selectedArticle: any = {};
-  savedArticle: any = {};
+  selectedArticle: any = {
+    author: '',
+    title: '',
+    description: '',
+    url: '',
+    urlToImage: '',
+    publishedAt: '',
+    comment: ''
+  };
+
   pageTitle = 'News Feeds';
   articleStore: any = [];
 
-  constructor(private articleService: ArticleService) {
+  constructor(private articleService: ArticleService, private favoritesService: FavoritesService) {
   }
 
   ngOnInit() {
-    const searchField = document.querySelector('#userSelections');
-    console.log('Making api call');
+    this.populateFromLocalStorage();
     this.articleService.getArticles()
-      .subscribe((data) => {
-        this.articlesList = new Array;
-        console.log('Data: ', data);
+      .subscribe((data) => this.articlesList = data.articles);
+  }
 
-        this.articlesList.push(data.articles);
-        console.log('Default News Api Data:', this.articlesList);
-      });
+  populateFromLocalStorage() {
+    const currentArticlesFromStore = localStorage.getItem('articles');
+    this.articleStore = this.favoritesService.getFavoritesFromStorage();
   }
 
   sourceChanged(newSource) {
-    console.log('New Source chosen: ', newSource);
     this.newsSource = newSource;
     return this.newsSource;
   }
 
   displayChangedSource(newsSource) {
-    this.articlesList.length = 0;
-
     this.articleService.getArticlesBYNewsSource(this.newsSource)
-      .subscribe((data) => {
-        console.log('Data: ', data);
-
-        this.articlesList.push(data.articles);
-        console.log('New Api Data: ', this.articlesList);
-      });
+      .subscribe((data) => this.articlesList = data.articles);
   }
 
   SelectArticle(article: any) {
     this.selectedArticle = article;
   }
 
-  SaveArticle(selectedArticle: any) {
-    // Want to add a popup to ask for comment and add it to my selectedArticle data
-    const inputValue = (<HTMLInputElement>document.getElementById('commentText')).value;
-    console.log(inputValue);
-
-    if (inputValue) {
-      this.commentText = inputValue;
+  SaveArticle() {
+    if (this.selectedArticle.comment) {
+      this.commentText = this.selectedArticle.comment;
     } else {
       this.commentText = 'No comment left!';
     }
 
-    (<HTMLInputElement>document.getElementById('commentText')).value = null;
+    this.articleStore.push(this.selectedArticle);
 
-    // Creating savedArticles Object
-    this.savedArticle = {
-      title: this.selectedArticle.title,
-      author: this.selectedArticle.author,
-      description: this.selectedArticle.description,
-      url: this.selectedArticle.url,
-      urlToImage: this.selectedArticle.urlToImage,
-      publishedAt: this.selectedArticle.publishedAt,
-      comment: this.commentText
-    };
-
-    console.log(this.savedArticle);
-
-    this.articleStore.push(this.savedArticle);
-    let index: any = 0;
-    for (let i = 0; i < this.articleStore.length; i++) {
-      index++;
-    }
-
+    console.log('Why am I overwriting the first element in array of articles?');
+    console.log('Pushing up saved article of: ', this.selectedArticle);
     // const JsonreadyArticles = JSON.stringify(this.savedArticle);
     // this.newsStorageService.setSavedArticles('article', JsonreadyArticles);
-
-    localStorage.setItem('articles' + index, JSON.stringify(this.savedArticle));
+    this.favoritesService.setFavorites(this.articleStore);
     console.log(localStorage);
   }
 }
