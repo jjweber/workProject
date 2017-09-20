@@ -1,0 +1,44 @@
+<h1>My Favorites</h1>
+
+<div id="articlesContainer" class="container">
+  <ul class="cardContainer card-group row">
+    <li class="articleCards" *ngFor="let article of savedArticles; let i = index">
+      <div class="articleInfo">
+        <h4 class="articleTitle">{{article.title}}</h4>
+        <div><img class="newsImages" src="{{article.urlToImage}}"></div>
+        <p class="articleDescription">{{article.description}}</p>
+        <div class="overlay"></div>
+        <a id="favoritesModalBtn" data-toggle="modal" data-target="#favoritesModal" [attr.data-id]="article" (click)="ClickedArticle(article)">See More</a>
+      </div>
+      <div class="commentCard">
+        <h4 class="commentTitle">Comment</h4>
+        <p class="articleComment">{{article.comment}}</p>
+        <div class="overlay"></div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="favoritesModal" tabindex="-1" role="dialog" aria-labelledby="favoritesModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="favoritesModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <h3 class="articleTitle">{{clickedArticle.title}}</h3>
+        <div><img class="newsImages" src="{{clickedArticle.urlToImage}}"></div>
+        <p class="articleDescription">Description: {{clickedArticle.description}}</p>
+        <p class="articleAuthor" *ngIf="clickedArticle.author; else elseBlock">Author: {{clickedArticle.author}}</p>
+        <ng-template #elseBlock>Author: Unknown<br></ng-template>
+        <a href="{{clickedArticle.url}}">Link to Article: {{clickedArticle.url}}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" [attr.data-id]="clickedArticle" (click)="DeleteArticle(clickedArticle)" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

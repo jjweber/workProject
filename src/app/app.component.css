@@ -5,15 +5,6 @@ body {
    height:100%;
 }
 
-.navbar {
-  background: #327cf2;
-}
-
-.navbar-brand,
-.navbar-nav>li>a {
-  color: #FFF;
-}
-
 #container {
    min-height:100%;
    position: relative;
@@ -29,15 +20,4 @@ body {
 
 h1 {
   font-size: 30px;
-}
-
-footer {
-  position: fixed;
-  padding: 1rem;
-  margin-top: 5rem;
-  text-align: center;
-  background: #CCC;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }

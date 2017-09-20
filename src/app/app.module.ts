@@ -5,11 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { FavoritesComponent } from './favorites/favorites.component';
-import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './pages/home/home.component';
+import { FavoritesComponent } from './pages/favorites/favorites.component';
+import { AboutComponent } from './pages/about/about.component';
 
 import { ArticleService } from './services/article.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+// import { NewsStorageService } from './services/newsStorage.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -23,7 +26,9 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     FavoritesComponent,
-    AboutComponent
+    AboutComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     FormsModule,

@@ -1,0 +1,137 @@
+
+h1 {
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 5rem;
+}
+
+#articlesContainer {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.cardContainer {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 3rem;
+  margin: 0 auto;
+}
+
+.cardContainer li {
+  list-style: none;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  margin: 1rem 1rem 2rem 1rem;
+}
+
+@media only screen and (min-width: 540px) {
+  .cardContainer li {
+  	width: calc(100%/2 - 2rem);
+  }
+}
+
+@media only screen and (min-width: 776px) {
+  .cardContainer li {
+  	width: calc(100%/3 - 2rem);
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .cardContainer li {
+  	width: calc(100%/4 - 2rem);
+  }
+}
+
+.articleInfo {
+  position: relative;
+  border: 1px solid #e6e6e6;
+}
+
+.cardContainer li h4 {
+  padding: 1rem;
+  margin-top: 0;
+}
+
+.articleTitle {
+  background: #327cf2;
+  color: #FFF;
+  height: 10rem;
+  overflow: -webkit-paged-x;
+}
+
+.newsImages {
+  text-align: center;
+  width: 100%;
+  padding: 0;
+  margin: -1rem 0 2.5rem 0;
+}
+
+.articleDescription {
+  height: 12rem;
+  overflow-x: hidden;
+  padding: .5rem;
+  margin: 0 0 4rem 0;
+}
+
+.commentsContainer {
+  width: 100%;
+  text-align: center;
+  margin: 5rem auto;
+}
+
+.commentCard {
+  position: relative;
+  text-align: center;
+  border: 1px solid #e6e6e6;
+  display: flex;
+  flex-wrap: wrap;
+  width:100%;
+  margin-top: 3rem;
+}
+
+.commentTitle {
+  width: 100%;
+  padding: .5rem;
+  background: #f3af1a;
+  margin-top: 0;
+}
+
+.articleComment {
+  padding: 0 .5rem;
+  margin: 0 auto 1rem auto;
+}
+
+#favoritesModalBtn {
+  background: #CCC;
+  color: #FFF;
+  cursor: pointer;
+  position: absolute;
+  padding: 0.5rem 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.40);
+  overflow: hidden;
+  transition: .5s ease;
+}
+
+.articleInfo:hover .overlay {
+  cursor: pointer;
+  height: 100%;
+}
+
+.commentCard:hover .overlay {
+  cursor: pointer;
+  height: 100%;
+}
