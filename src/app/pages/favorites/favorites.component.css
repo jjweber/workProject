@@ -11,6 +11,12 @@ h1 {
   margin: 0;
 }
 
+h3.emptyMessage,
+h4.emptyMessage {
+  color: indianred;
+  padding: 0 3rem;
+}
+
 .cardContainer {
   text-align: center;
   width: 100%;
@@ -20,7 +26,7 @@ h1 {
   margin: 0 auto;
 }
 
-.cardContainer li {
+.articleCards {
   list-style: none;
   position: relative;
   width: 100%;
@@ -28,30 +34,31 @@ h1 {
   margin: 1rem 1rem 2rem 1rem;
 }
 
-@media only screen and (min-width: 540px) {
-  .cardContainer li {
+@media only screen and (min-width: 600px) {
+  .articleCards {
   	width: calc(100%/2 - 2rem);
   }
 }
 
-@media only screen and (min-width: 776px) {
-  .cardContainer li {
+@media only screen and (min-width: 900px) {
+  .articleCards {
   	width: calc(100%/3 - 2rem);
   }
 }
 
-@media only screen and (min-width: 1000px) {
-  .cardContainer li {
+@media only screen and (min-width: 1100px) {
+  .articleCards {
   	width: calc(100%/4 - 2rem);
   }
 }
 
 .articleInfo {
   position: relative;
+  min-height: 620px;
   border: 1px solid #e6e6e6;
 }
 
-.cardContainer li h4 {
+.articleCards h4 {
   padding: 1rem;
   margin-top: 0;
 }
@@ -66,6 +73,7 @@ h1 {
 .newsImages {
   text-align: center;
   width: 100%;
+  min-height: 300px;
   padding: 0;
   margin: -1rem 0 2.5rem 0;
 }
@@ -101,8 +109,40 @@ h1 {
 }
 
 .articleComment {
-  padding: 0 .5rem;
+  padding: .5rem 1rem;
   margin: 0 auto 1rem auto;
+}
+
+.modal-header {
+  background: #327cf2;
+  color: #FFF
+}
+
+.closeX {
+  color: #FFF;
+  font-size: larger;
+}
+
+.modal-header .articleTitle {
+  width: 100%;
+}
+
+.modal-body .articleDescription {
+  margin-bottom: 0;
+}
+
+.modal-body p {
+  text-align: left;
+  padding: .5rem;
+}
+
+.modal-body span {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.modal-footer {
+  background: #CCC;
 }
 
 #favoritesModalBtn {

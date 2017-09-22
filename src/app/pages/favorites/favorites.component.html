@@ -1,8 +1,8 @@
-<h1>My Favorites</h1>
+<h1>{{pageTitle}}</h1>
 
 <div id="articlesContainer" class="container">
 
-  <ul class="cardContainer card-group row">
+  <ul *ngIf="articlesFromStorage.length > 0; else emptyMessageBlock" class="cardContainer card-group row">
     <li (click)="ClickedArticle(article, i)" class="articleCards" *ngFor="let article of articlesFromStorage; let i = index">
       <div class="articleInfo">
         <h4 class="articleTitle">{{article.title}}</h4>
@@ -18,6 +18,10 @@
       </div>
     </li>
   </ul>
+  <ng-template #emptyMessageBlock>
+    <h3 class="emptyMessage">No Favorites saved!</h3>
+    <h4 class="emptyMessage">Click "See More" on the articles you like on the News Feeds page and press the Favorite button to add it here to your Favorites page! </h4>
+  </ng-template>
 </div>
 
 <!-- Modal -->
@@ -25,20 +29,19 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="favoritesModalLabel">Modal title</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeX" aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title articleTitle" id="favoritesModalLabel">{{clickedArticle.title}}</h4>
       </div>
       <div class="modal-body">
-        <h3 class="articleTitle">{{clickedArticle.title}}</h3>
         <div><img class="newsImages" src="{{clickedArticle.urlToImage}}"></div>
-        <p class="articleDescription">Description: {{clickedArticle.description}}</p>
-        <p class="articleAuthor" *ngIf="clickedArticle.author; else elseBlock">Author: {{clickedArticle.author}}</p>
-        <ng-template #elseBlock>Author: Unknown<br></ng-template>
-        <a href="{{clickedArticle.url}}">Link to Article: {{clickedArticle.url}}</a>
+        <p class="articleDescription"><span>Description: </span>{{clickedArticle.description}}</p>
+        <p class="articleAuthor" *ngIf="clickedArticle.author; else elseBlock"><span>Author: </span>{{clickedArticle.author}}</p>
+        <ng-template #elseBlock><p class="articleAuthor"><span>Author: </span>Unknown</p><br></ng-template>
+        <p><span>Link to Article: </span><a href="{{clickedArticle.url}}">{{clickedArticle.url}}</a></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" [attr.data-id]="clickedArticle" (click)="DeleteArticle()" data-dismiss="modal">Delete</button>
+        <button type="button" class="btn btn-danger" [attr.data-id]="clickedArticle" (click)="DeleteArticle()" data-dismiss="modal">Delete</button>
       </div>
     </div>
   </div>

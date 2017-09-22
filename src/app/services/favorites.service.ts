@@ -9,7 +9,11 @@ export class FavoritesService {
   constructor() {}
 
   getFavoritesFromStorage() {
-    return JSON.parse(localStorage.getItem('articles'));
+    let favs = JSON.parse(localStorage.getItem('articles'));
+    if (!favs) {
+      favs = [];
+    }
+    return favs;
   }
 
   setFavorites(favorites) {

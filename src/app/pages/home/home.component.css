@@ -1,5 +1,5 @@
 optgroup {
-  
+
 }
 
 h1 {
@@ -23,7 +23,7 @@ h1 {
   margin: 0 auto;
 }
 
-.cardContainer li {
+.articleCards {
   list-style: none;
   position: relative;
   width: 100%;
@@ -33,27 +33,37 @@ h1 {
 }
 
 @media only screen and (min-width: 540px) {
-  .cardContainer li {
+  .articleCards {
   	width: calc(100%/2 - 2rem);
   }
 }
 
 @media only screen and (min-width: 776px) {
-  .cardContainer li {
+  .articleCards {
   	width: calc(100%/3 - 2rem);
   }
 }
 
 @media only screen and (min-width: 1000px) {
-  .cardContainer li {
+  .articleCards {
   	width: calc(100%/4 - 2rem);
   }
 }
 
-.cardContainer li h3 {
+.articleTitle {
+  height: 10rem;
+  overflow: -webkit-paged-x;
+}
+
+.articleDescription {
+  height: 12rem;
+  overflow-x: hidden;
+}
+
+.articleCards h3 {
   background: #327cf2;
   color: #FFF;
-  padding: 1rem 0;
+  padding: 1rem;
   margin-top: 0;
 }
 
@@ -64,7 +74,7 @@ h1 {
   margin: -1rem 0 2.5rem 0;
 }
 
-.cardContainer li p:first-of-type {
+.articleCards p:first-of-type {
   padding: 0 .5rem;
   margin: 0 0 4rem 0;
 }
@@ -79,13 +89,41 @@ h1 {
   transition: .5s ease;
 }
 
-.articleCards {
-  position: relative;
-}
-
 .articleCards:hover .overlay {
   cursor: pointer;
   height: 100%;
+}
+
+.modal-header {
+  background: #327cf2;
+  color: #FFF
+}
+
+.closeX {
+  color: #FFF;
+  font-size: larger;
+}
+
+.modal-header .articleTitle {
+  width: 100%;
+}
+
+.modal-body .articleDescription {
+  margin-bottom: 0;
+}
+
+.modal-body p {
+  text-align: left;
+  padding: .5rem;
+}
+
+.modal-body span {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.modal-footer {
+  background: #CCC;
 }
 
 #modalBtn {

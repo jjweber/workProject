@@ -14,7 +14,6 @@ import { FavoritesService } from './services/favorites.service';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-// import { NewsStorageService } from './services/newsStorage.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },

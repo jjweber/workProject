@@ -2,11 +2,25 @@
   background: #327cf2;
 }
 
-.navbar-brand,
-.navbar-nav>li>a {
-  color: #FFF;
+.navbar-default .navbar-toggle .icon-bar {
+  background: #FFF;
 }
 
 .navbar-default .navbar-nav>li>a .active {
   color: #333;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+  color: #FFF;
+}
+
+.navbar-nav li a:active {
+  color: #000;
+}
+
+.navbar-brand:hover,
+.navbar-nav li a:hover {
+  background: rgba(255, 255, 255, 0.47);
+  color: #000;
 }
