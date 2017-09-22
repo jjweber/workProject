@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
-    // Calling populateFromLocalStorage function on init.
+    // Calling populateFromLocalStorage function on init to make sure localStorage is not overwriten.
     this.populateFromLocalStorage();
 
     // Calling getArticles from articleService which makes a call to the news api to populate the view with ABC news articles on init.
