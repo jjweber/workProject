@@ -7,30 +7,38 @@ import { FavoritesService } from '../../services/favorites.service';
   styleUrls: ['./favorites.component.css']
 })
 export class FavoritesComponent implements OnInit {
+
+  // Declaring variables.
   pageTitle = 'My Favorites';
   articlesFromStorage: any = [];
-  indexOfArticleToDelete: any;
+  indexOfArticleViewed: any;
   clickedArticle: any = {};
 
   constructor(private favoritesService: FavoritesService) {}
 
   ngOnInit() {
+
+    // Calling the getFavoritesFromStorage from favoritesService and storing it in my articlesFromStorage variable.
     this.articlesFromStorage = this.favoritesService.getFavoritesFromStorage();
-    console.log('Articles From Storage', this.articlesFromStorage);
   }
 
+  // Function that is called from the article that is clicked on and passes it that articles data and index.
   ClickedArticle(article: any, index) {
-    console.log('Article clicked: ', article);
+    // Storing the passed article to the clickedArticle variable.
     this.clickedArticle = article;
+    console.log('Article clicked: ', article);
 
-    console.log('Removing article at index of: ', index);
-    this.indexOfArticleToDelete = index;
+    // Storing the passed index to the indexOfArticleViewed variable.
+    this.indexOfArticleViewed = index;
+    console.log('Viewing article at index of: ', index);
   }
 
+  // Fuction that removes an article from localStorage.
   DeleteArticle() {
-    console.log('Fix deactivated...');
+    // Calling the removeFavorite function from favoritesService and passing it the article to remove from localStorage.
+    this.favoritesService.removeFavorite(this.indexOfArticleViewed);
 
-    this.favoritesService.removeFavorite(this.indexOfArticleToDelete);
+    // Getting the changed localStorage to reset and remove the deleted article from the screen.
     this.articlesFromStorage = this.favoritesService.getFavoritesFromStorage();
   }
 }

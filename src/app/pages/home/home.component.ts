@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
     // Calling populateFromLocalStorage function on init to make sure localStorage is not overwriten.
     this.populateFromLocalStorage();
 
@@ -45,7 +44,7 @@ export class HomeComponent implements OnInit {
   populateFromLocalStorage() {
     // Created variable to hold the articles already saved in localStorage.
     const currentArticlesFromStore = localStorage.getItem('articles');
-    // Calling getFavoritesFromStorage function from favoritesService and setting it to my articleStore variable.
+    // Calling getFavoritesFromStorage function from favoritesService and storing it in my articleStore variable.
     this.articleStore = this.favoritesService.getFavoritesFromStorage();
   }
 
