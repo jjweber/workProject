@@ -1,4 +1,4 @@
-<!-- onmousedown="if(this.options.length>4){this.size=4;}" onblur="this.size=0;" -->
+<!-- HTML select for news sources -->
 <form class="navbar-form searchForm">
   <select class="form-control" [(ngModel)]="newsSource" (ngModelChange)="sourceChanged($event)" id="searchBar" name="select1">
     <optgroup label="Buisness">
@@ -58,8 +58,10 @@
 </form>
 
 <div>
+  <!-- Displays page name -->
   <h1>{{pageTitle}}</h1>
 
+  <!-- Displays all articles for chosen source -->
   <div id="articlesContainer" class="container">
     <ul class="cardContainer">
       <li class="articleCards" *ngFor="let article of articlesList; let i = index">
@@ -73,7 +75,7 @@
     </ul>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal to show larger view of selected article and shows addition including author and link to article   -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -86,7 +88,7 @@
           <p class="articleDescription"><span>Description: </span>{{selectedArticle.description}}</p>
           <p class="articleAuthor" *ngIf="selectedArticle.author; else elseBlock"><span>Author: </span>{{selectedArticle.author}}</p>
           <ng-template #elseBlock><p class="articleAuthor"><span>Author: </span>Unknown</p><br></ng-template>
-          <p><span>Link to Article: </span><a href="{{selectedArticle.url}}">{{selectedArticle.url}}</a></p>
+          <p><span>Link to Article: </span><a href="{{selectedArticle.url}}" target="_blank">{{selectedArticle.url}}</a></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -96,6 +98,7 @@
     </div>
   </div>
 
+  <!-- Modal popup that asks user for a comment about the artice they are saving -->
   <div class="modal fade" id="myModalPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

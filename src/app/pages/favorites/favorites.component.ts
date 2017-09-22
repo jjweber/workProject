@@ -18,7 +18,7 @@ export class FavoritesComponent implements OnInit {
 
   ngOnInit() {
 
-    // Calling the getFavoritesFromStorage from favoritesService and storing it in my articlesFromStorage variable.
+    // Variable to hold localStorage items.
     this.articlesFromStorage = this.favoritesService.getFavoritesFromStorage();
   }
 

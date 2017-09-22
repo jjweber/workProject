@@ -1,7 +1,8 @@
+<!-- Displays page name -->
 <h1>{{pageTitle}}</h1>
 
+<!-- Displays all articles that are saved in localStorage -->
 <div id="articlesContainer" class="container">
-
   <ul *ngIf="articlesFromStorage.length > 0; else emptyMessageBlock" class="cardContainer card-group row">
     <li (click)="ClickedArticle(article, i)" class="articleCards" *ngFor="let article of articlesFromStorage; let i = index">
       <div class="articleInfo">
@@ -24,7 +25,7 @@
   </ng-template>
 </div>
 
-<!-- Modal -->
+<!-- Modal to show larger view of selected article and shows addition including author and link to article   -->
 <div class="modal fade" id="favoritesModal" tabindex="-1" role="dialog" aria-labelledby="favoritesModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -37,7 +38,7 @@
         <p class="articleDescription"><span>Description: </span>{{clickedArticle.description}}</p>
         <p class="articleAuthor" *ngIf="clickedArticle.author; else elseBlock"><span>Author: </span>{{clickedArticle.author}}</p>
         <ng-template #elseBlock><p class="articleAuthor"><span>Author: </span>Unknown</p><br></ng-template>
-        <p><span>Link to Article: </span><a href="{{clickedArticle.url}}">{{clickedArticle.url}}</a></p>
+        <p><span>Link to Article: </span><a href="{{clickedArticle.url}}" target="_blank">{{clickedArticle.url}}</a></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
