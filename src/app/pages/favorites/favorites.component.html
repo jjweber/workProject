@@ -6,10 +6,12 @@
   <ul *ngIf="articlesFromStorage.length > 0; else emptyMessageBlock" class="cardContainer card-group row">
     <li (click)="ClickedArticle(article, i)" class="articleCards" *ngFor="let article of articlesFromStorage; let i = index">
       <div class="articleInfo">
-        <h4 class="articleTitle">{{article.title}}</h4>
-        <div><img class="newsImages" src="{{article.urlToImage}}"></div>
-        <p class="articleDescription">{{article.description}}</p>
-        <div class="overlay"></div>
+        <div data-toggle="modal" data-target="#favoritesModal" [attr.data-id]="article">
+          <h4 class="articleTitle">{{article.title}}</h4>
+          <div><img class="newsImages" src="{{article.urlToImage}}"></div>
+          <p class="articleDescription">{{article.description}}</p>
+          <div class="overlay"></div>
+        </div>
         <a id="favoritesModalBtn" data-toggle="modal" data-target="#favoritesModal" [attr.data-id]="article">See More</a>
       </div>
       <div class="commentCard">
@@ -31,7 +33,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeX" aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title articleTitle" id="favoritesModalLabel">{{clickedArticle.title}}</h4>
+        <h3 class="modal-title articleTitle" id="favoritesModalLabel">{{clickedArticle.title}}</h3>
       </div>
       <div class="modal-body">
         <div><img class="newsImages" src="{{clickedArticle.urlToImage}}"></div>

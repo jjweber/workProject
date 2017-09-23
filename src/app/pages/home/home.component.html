@@ -54,10 +54,10 @@
       <option value="metro">Metro</option>
     </optgroup>
   </select>
-  <button type="button" (click)="displayChangedSource($event)">Select</button>
+  <button class="selectBtn" type="button" (click)="displayChangedSource($event)">Select</button>
 </form>
 
-<div>
+<div class="newsContainer">
   <!-- Displays page name -->
   <h1>{{pageTitle}}</h1>
 
@@ -65,11 +65,16 @@
   <div id="articlesContainer" class="container">
     <ul class="cardContainer">
       <li class="articleCards" *ngFor="let article of articlesList; let i = index">
-        <a class="hidden">{{i + 1}}</a>
-        <h3 class="articleTitle">{{article.title}}</h3>
-        <div><img class="newsImages" src="{{article.urlToImage}}"></div>
-        <p class="articleDescription">{{article.description}}</p>
-        <div class="overlay"></div>
+        <div data-toggle="modal" data-target="#myModal" [attr.data-id]="article" (click)="SelectArticle(article)">
+          <a class="hidden">{{i + 1}}</a>
+          <h4 class="articleTitle">{{article.title}}</h4>
+
+          <div *ngIf="article.urlToImage; else showDefaultImage"><img class="newsImages" src="{{article.urlToImage}}"></div>
+          <ng-template #showDefaultImage><img class="newsImages" src="http://lnbnews.com/wp-content/uploads/2017/04/org_default.jpg" alt="default image"></ng-template>
+
+          <p class="articleDescription">{{article.description}}</p>
+          <div class="overlay"></div>
+        </div>
         <a id="modalBtn" data-toggle="modal" data-target="#myModal" [attr.data-id]="article" (click)="SelectArticle(article)">See More</a>
       </li>
     </ul>
@@ -84,10 +89,15 @@
           <h3 class="modal-title articleTitle" id="myModalLabel">{{selectedArticle.title}}</h3>
         </div>
         <div class="modal-body">
-          <div><img class="newsImages" src="{{selectedArticle.urlToImage}}"></div>
+
+          <div *ngIf="selectedArticle.urlToImage; else showDefaultImageOnModal"><img class="newsImages" src="{{selectedArticle.urlToImage}}"></div>
+          <ng-template #showDefaultImageOnModal><img class="newsImages" src="http://lnbnews.com/wp-content/uploads/2017/04/org_default.jpg" alt="default image"></ng-template>
+
           <p class="articleDescription"><span>Description: </span>{{selectedArticle.description}}</p>
+
           <p class="articleAuthor" *ngIf="selectedArticle.author; else elseBlock"><span>Author: </span>{{selectedArticle.author}}</p>
           <ng-template #elseBlock><p class="articleAuthor"><span>Author: </span>Unknown</p><br></ng-template>
+
           <p><span>Link to Article: </span><a href="{{selectedArticle.url}}" target="_blank">{{selectedArticle.url}}</a></p>
         </div>
         <div class="modal-footer">

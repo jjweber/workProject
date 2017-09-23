@@ -14,6 +14,9 @@ export class HomeComponent implements OnInit {
   pageTitle = 'News Feeds';
   articles: any;
   commentText: any;
+
+  imageToSave: any;
+
   newsSource: any = 'abc-news-au';
   articlesList: any = [];
   selectedArticle: any = {
@@ -26,6 +29,7 @@ export class HomeComponent implements OnInit {
     comment: ''
   };
   articleStore: any = [];
+  defaultImageToShow = 'http://lnbnews.com/wp-content/uploads/2017/04/org_default.jpg';
 
   constructor(private articleService: ArticleService, private favoritesService: FavoritesService) {
   }
@@ -75,6 +79,13 @@ export class HomeComponent implements OnInit {
       this.commentText = this.selectedArticle.comment;
     } else {
       this.selectedArticle.comment = 'No comment left!';
+    }
+
+    // If there is an article image it will save it, else it will assign a placeholder image to the article.
+    if (this.selectedArticle.urlToImage) {
+      this.imageToSave = this.selectedArticle.urlToImage;
+    } else {
+      this.selectedArticle.urlToImage = this.defaultImageToShow;
     }
 
     // Pushing the selectedArticle to my articleStore array.
